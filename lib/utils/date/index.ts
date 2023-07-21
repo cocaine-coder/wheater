@@ -13,7 +13,7 @@ export function toDateOnly(date: Date) {
 
 /**
  * copy and add days
- * @param base 
+ * @param date 
  * @param days 
  * @returns 
  * @example
