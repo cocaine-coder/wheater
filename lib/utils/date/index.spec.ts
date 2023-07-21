@@ -24,19 +24,33 @@ describe("time", () => {
         expect(addDays(date, 1)).toStrictEqual(new Date("1997-05-01 12:00:06"));
         expect(addDays(date, 0)).toStrictEqual(date);
         expect(addDays(date, -1)).toStrictEqual(new Date("1997-04-29 12:00:06"))
-    })
+    });
 
     test("addMonths", () => {
         const date = new Date("1997-12-30 12:00:06");
         expect(addMonths(date, 1)).toStrictEqual(new Date("1998-01-30 12:00:06"));
         expect(addMonths(date, 0)).toStrictEqual(new Date("1997-12-30 12:00:06"));
         expect(addMonths(date, -1)).toStrictEqual(new Date("1997-11-30 12:00:06"));
+    });
+
+    test("addYears", () => {
+        const date = new Date("1997-12-30 12:00:06");
+        expect(addYears(date, 1)).toStrictEqual(new Date("1998-12-30 12:00:06"));
+        expect(addYears(date, 0)).toStrictEqual(new Date("1997-12-30 12:00:06"));
+        expect(addYears(date, -1)).toStrictEqual(new Date("1996-12-30 12:00:06"));
+    });
+
+    test("getNearDays", () => {
+        const date = new Date("1997-04-30");
+        expect(getNearDays(date, 0)).toStrictEqual([]);
+        expect(getNearDays(date, 2)).toStrictEqual([new Date("1997-05-01"), new Date("1997-05-02")]);
+        expect(getNearDays(date, -2)).toStrictEqual([new Date("1997-04-28"), new Date("1997-04-29")]);
     })
 
-    test("getDays", () => {
-        const date = new Date("1997-04-30 12:00:06");
+    test("getNearinDays", () => {
+        const date = new Date("1997-04-30");
         expect(getNearinDays(date, 0)).toStrictEqual([date]);
-        expect(getNearinDays(date, 2)).toStrictEqual([date, addDays(date, 1), addDays(date, 2)]);
-        expect(getNearinDays(date, -2)).toStrictEqual([addDays(date, -2), addDays(date, -1), date]);
+        expect(getNearinDays(date, 2)).toStrictEqual([date, new Date("1997-05-01"), new Date("1997-05-02")]);
+        expect(getNearinDays(date, -2)).toStrictEqual([new Date("1997-04-28"), new Date("1997-04-29"), date]);
     });
 });

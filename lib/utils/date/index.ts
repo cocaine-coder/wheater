@@ -61,7 +61,7 @@ type DateFormat = "yyyy-MM-dd" | "HH:mm:ss" | "yyyy-MM-dd HH:mm:ss";
  * console.log(formatDate(date,'yyyy-MM-dd HH:mm:ss'));  // '2022-02-02 02:22:22'
  * 
  * console.log(formatDate('2022-02-02 02:22:22','yyyy-MM-dd'));  // '2022-02-02'
- * formateDate('2022-02-30','yyyy-MM-dd') // throw error : Date Invalid
+ * formatDate('2022-02-30','yyyy-MM-dd') // throw error : Date Invalid
  * @returns 
  */
 export function formatDate(date: string | Date, format: DateFormat) {
@@ -105,7 +105,7 @@ export function getNearDays(originDate: Date, days: number, format?: DateFormat)
 
     if (days === 0) return [];
 
-    const startIndex = Math.min(days, days > 0 ? 0 : 1);
+    const startIndex = Math.min(days, days > 0 ? 1 : 0);
     const endIndex = Math.max(days, days < 0 ? -1 : 0);
 
     const dates = new Array<Date>();
