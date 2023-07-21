@@ -5,6 +5,12 @@ type PredicateType<T> = ArrayCallBack<T, boolean>;
 export default class List<T> {
     protected _items: T[];
 
+    *[Symbol.iterator]() {
+        for (let item of this._items) {
+            yield item
+        }
+    }
+
     get count() {
         return this._items.length;
     }

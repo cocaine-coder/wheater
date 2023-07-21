@@ -6,6 +6,15 @@ function getList123() {
 }
 
 describe("linq for js/ts", () => {
+    test("iterator", () => {
+        let sum = 0;
+        for (let item of getList123()) {
+            sum += item;
+        }
+
+        expect(sum).toBe(6);
+    });
+
     test("count", () => {
         expect(getList123().count).toBe(3);
     });
