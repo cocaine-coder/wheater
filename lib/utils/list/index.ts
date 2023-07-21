@@ -2,7 +2,7 @@ type ArrayCallBack<T, R> = (value: T, index: number, list: T[]) => R;
 
 type PredicateType<T> = ArrayCallBack<T, boolean>;
 
-class List<T> {
+export default class List<T> {
     protected _items: T[];
 
     get count() {
@@ -34,7 +34,8 @@ class List<T> {
     }
 
     removeAt(index: number) {
-        this._items.splice(index, 1)
+        this._items.splice(index, 1);
+        return this;
     }
 
     where(predicate: PredicateType<T>) {
@@ -42,19 +43,17 @@ class List<T> {
     }
 
     select<R>(callbackfn: ArrayCallBack<T, R>) {
-        const result = this._items.map(callbackfn);
-
-        return new List(result);
+        return new List(this._items.map(callbackfn));
     }
 
     groupBy<K>(keySelector: (v: T) => K): Map<K, Array<T>>
-    groupBy<K, V>(keySelector: (v: T) => K, valueSelector: (v: T) => V): Map<K, Array<T>>
+    groupBy<K, V>(keySelector: (v: T) => K, valueSelector: (v: T) => V): Map<K, Array<V>>
     groupBy<K, V>(keySelector: (v: T) => K, valueSelector?: (v: T) => V) {
         const result = new Map<K, Array<V | T>>();
 
         this._items.forEach((v) => {
             const key = keySelector(v);
-            const value = valueSelector ? v : valueSelector!(v);
+            const value = valueSelector ? valueSelector(v) : v;
             if (result.has(key))
                 result.get(key)?.push(value);
             else
@@ -66,7 +65,7 @@ class List<T> {
 
     sum(valueSelector?: ArrayCallBack<T, number>) {
         return valueSelector ?
-            this._items.reduce((p, c, i, arr) => p + valueSelector(c, i, arr), 0) : 
+            this._items.reduce((p, c, i, arr) => p + valueSelector(c, i, arr), 0) :
             this.count;
     }
 
