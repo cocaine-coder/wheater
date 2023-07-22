@@ -122,8 +122,7 @@ export default class List<T> {
         if (!predicate) return this._items.length > 0;
 
         for (let i = 0; i < this._items.length; i++) {
-            const item = this._items[i];
-            if (predicate(item, i, this._items))
+            if (predicate(this._items[i], i, this._items))
                 return true;
         }
 
@@ -132,8 +131,7 @@ export default class List<T> {
 
     all(predicate: PredicateType<T>) {
         for (let i = 0; i < this._items.length; i++) {
-            const item = this._items[i];
-            if (!predicate(item, i, this._items))
+            if (!predicate(this._items[i], i, this._items))
                 return false;
         }
 
