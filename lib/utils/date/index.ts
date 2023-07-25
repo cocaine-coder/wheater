@@ -48,7 +48,7 @@ export function addYears(date: Date, years: number) {
     return new Date(new Date(date).setFullYear(date.getFullYear() + years));
 }
 
-type DateFormat = "yyyy-MM-dd" | "HH:mm:ss" | "yyyy-MM-dd HH:mm:ss";
+type DateFormat = "yyyy-MM-dd" | "HH:mm:ss" | "yyyy-MM-dd HH:mm:ss" | "yyyy年MM月dd日" | "yyyy年MM月dd日 HH:mm:ss";
 
 /**
  * format date
