@@ -17,8 +17,6 @@ export function equal<T>(a: T, b: T) {
     if (a === b) return true;
 
     if (a && b && typeof a === 'object' && typeof b === 'object') {
-        if (a.constructor !== b.constructor) return false;
-
         // 数组
         if (a instanceof Array && b instanceof Array) {
             if (a.length !== b.length) return false;
@@ -68,11 +66,6 @@ export function equal<T>(a: T, b: T) {
 }
 
 export function setProps<T extends object>(src: T, dest: T) {
-    if (src === undefined || src === null) {
-        dest = src;
-        return;
-    }
-
     for (const prop in src) {
         const value = src[prop];
 

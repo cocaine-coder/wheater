@@ -10,7 +10,26 @@ export const cities = {
     91: "国外"
 }
 
-export function getCities(options: { sar?: boolean, tw?: boolean } = {}) {
+interface GetCitiesOptions {
+    /**
+     * 特别行政区 
+     * 默认 : true
+     */
+    sar?: boolean,
+
+    /**
+     * 台湾
+     * 默认 : true
+     */
+    tw?: boolean
+}
+
+/**
+ * 获取中国所有的城市以及编码
+ * @param options 
+ * @returns 
+ */
+export function getCities(options: GetCitiesOptions = {}) {
     options.sar ??= true;
     options.tw ??= true;
 

@@ -126,7 +126,7 @@ export function getNearinDays(originDate: Date, days: number, format: DateFormat
 export function getNearinDays(originDate: Date, days: number, format?: DateFormat) {
     if (!Number.isInteger(days))
         throw Error("days must be integer");
-
+   
     if (days === 0) return [originDate];
 
     const startIndex = Math.min(days, 0);

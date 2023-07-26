@@ -1,6 +1,17 @@
 import { cities } from '../common';
 import { CardOptions, PasswordOptions } from './type';
 
+export namespace os {
+    /**
+     * 判断当前设备是否为移动端
+     * @returns 
+     */
+    export function isMobile() {
+        if(typeof window === "undefined") return false;
+        return window.navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i) !== null;
+    }
+}
+
 /**
  * 邮箱检验
  * @param value 邮箱
@@ -28,20 +39,18 @@ export function phone(value: string) {
 export function card(value: string, options: CardOptions = {}) {
     options.parity ??= true;
 
-    if (!value) return false;
-
     // 检查号码规范 长度和类型
     if (! /(^\d{15}$)|(^\d{17}(\d|X|x)$)/.test(value)) return false;
 
     // 检查省份
-    if (!(cities as any)[value.substring(0, 1)]) return false;
+    if (!(cities as any)[value.substring(0, 2)]) return false;
 
     // 检查出生日期
     const reg = value.length === 15 ?
         /^(\d{6})(\d{2})(\d{2})(\d{2})(\d{3})$/ :
         /^(\d{6})(\d{4})(\d{2})(\d{2})(\d{3})([0-9]|X|x)$/;
     const dates = value.match(reg)!;
-    const date = new Date(value.length === 15 ? '19' : '' +
+    const date = new Date((value.length === 15 ? '19' : '') +
         `${dates[2]}-${dates[3]}-${dates[4]}`);
 
     if (!(date instanceof Date) || isNaN(date.getTime()))
@@ -62,13 +71,6 @@ export function card(value: string, options: CardOptions = {}) {
     return true;
 }
 
-/**
- * 判断当前设备是否为移动端
- * @returns 
- */
-export function isMobile() {
-    return window.navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i) !== null;
-}
 
 /**
  * 密码验证
@@ -88,10 +90,11 @@ export function password(value: string, options: PasswordOptions = {}) {
     if (options.maxLength < options.minLength)
         throw Error(`maxLength must >= minLength`);
 
-    let regStr = options.includeNummber ? '(?=.*[0-9])' : '';
-    regStr += options.caseSensitive ? '(?=.*[a-zA-Z])' : '(?=.*[A-Z])(?=.*[a-z])';
+    let regStr = '^';
+    regStr += options.includeNummber ? '(?=.*[0-9])' : '';
+    regStr += options.caseSensitive ? '(?=.*[A-Z])(?=.*[a-z])' : '(?=.*[a-zA-Z])';
     regStr += options.includeSpecialChars ? '(?=.*[^a-zA-Z0-9])' : '';
 
-    const reg = new RegExp(regStr + `.{${options.minLength},${options.maxLength}}`);
+    const reg = new RegExp(regStr + `.{${options.minLength},${options.maxLength}}$`);
     return reg.test(value);
 }

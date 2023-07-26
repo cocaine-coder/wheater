@@ -2,6 +2,10 @@ import { describe, expect, test } from "vitest";
 import { clone, equal, setProps } from '.';
 
 describe("deep clone", () => {
+    test("null", () => {
+        expect(clone(null)).toBeNull();
+    });
+
     test("boolean", () => {
         expect(clone(true)).toBe(true);
         expect(clone(false)).toBe(false);
@@ -23,6 +27,14 @@ describe("deep clone", () => {
         expect(copy === date).toBe(false);
         expect(copy).toStrictEqual(date);
     });
+
+    test("RegExp", () => {
+        const reg = new RegExp(/f/);
+        const copy = clone(reg);
+
+        expect(copy === reg).toBe(false);
+        expect(copy).toStrictEqual(reg);
+    })
 
     test("object", () => {
         const value = { a: 1, b: { c: "123" } };
@@ -74,12 +86,23 @@ describe("deep equal", () => {
         ]);
 
         const value3 = new Map<number, string>([
-            [1, "1"],
-            [1, "2"]
+            [3, "1"],
+            [1, "2"],
         ]);
 
-        expect(equal(value1, value2)).toBe(true);
-        expect(equal(value1, value3)).toBe(false);
+        expect(equal(value1, value2)).toBeTruthy();
+        expect(equal(value1, value3)).toBeFalsy();
+    });
+
+    test("array", () => {
+        expect(equal([1, 2, 3], [1, 2, 3])).toBeTruthy();
+        expect(equal([1, 2, 3], [1, 3, 2])).toBeFalsy();
+        expect(equal([1, 2, 3], [1, 2, 3, 4])).toBeFalsy();
+    });
+
+    test("RegExp", () => {
+        expect(equal(new RegExp(/t/g), new RegExp(/t/g))).toBeTruthy();
+        expect(equal(new RegExp(/t/), new RegExp(/t/g))).toBeFalsy();
     });
 
     test("other object", () => {
