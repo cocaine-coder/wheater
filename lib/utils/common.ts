@@ -43,7 +43,7 @@ export function getCities(options: GetCitiesOptions = {}) {
         if (!options.tw && num === 71)
             continue;
 
-        if (num < 91 && (options.sar || (num === 81))) {
+        if (num < 91) {
             results.push((cities as any)[prop])
         }
     }

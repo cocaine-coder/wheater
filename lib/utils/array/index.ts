@@ -97,7 +97,7 @@ export function skipWhile<T>(arr: Array<T>, predicate: (v: T) => boolean) {
  * @param keySelector
  * @example
  * const datas = [{num:1,foo:"f"},{num:1,foo:"f"},{num:2,foo:"1"}];
- * array.groupBy(datas, x=>num);
+ * array.groupBy(datas, x=>x.num);
  * 
  * 结果类型 : Map<number,Array<{num:number,foo:string}>>
  * 结果数据 : 
@@ -113,7 +113,7 @@ export function groupBy<T, K>(arr: Array<T>, keySelector: (v: T) => K): Map<K, A
  * @param valueSelector 
  * @example
  * const datas = [{num:1,foo:"f"},{num:1,foo:"f"},{num:2,foo:"1"}];
- * array.groupBy(datas, x=>num, x=>x.foo);
+ * array.groupBy(datas, x=>x.num, x=>x.foo);
  * 
  * 结果类型 : Map<number,Array<string>>
  * 结果数据 : 

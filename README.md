@@ -38,7 +38,7 @@ array.sum([1,2,3],v=>v); //6
 ```
 #### #groupBy
 ```ts
-array.groupBy([{num:1,foo:"f"},{num:1,foo:"f"},{num:2,foo:"123"}],x=>num);
+array.groupBy([{num:1,foo:"f"},{num:1,foo:"f"},{num:2,foo:"123"}],x=>x.num);
 /**
  * new Map([
  *  [1,[{num:1,foo:"f"},{num:2,foo:"123"}]],
@@ -46,7 +46,7 @@ array.groupBy([{num:1,foo:"f"},{num:1,foo:"f"},{num:2,foo:"123"}],x=>num);
  * ]);
  * */ 
 
-array.groupBy([{num:1,foo:"f"},{num:1,foo:"f"},{num:2,foo:"123"}],x=>num,x=>x.foo);
+array.groupBy([{num:1,foo:"f"},{num:1,foo:"f"},{num:2,foo:"123"}],x=>x.num,x=>x.foo);
 /**
  * new Map([
  *  [1,["f","123"]],

@@ -14,11 +14,13 @@ describe("common", () => {
         expect(cities).not.toHaveProperty("91");
         expect(cities).not.toHaveProperty("81");
         expect(cities).not.toHaveProperty("82");
+        expect(cities.length).toBe(32);
     });
 
     test("getCities not include tw", () => {
         const cities = common.getCities({ tw: false });
         expect(cities).not.toHaveProperty("91");
         expect(cities).not.toHaveProperty("71");
+        expect(cities.length).toBe(33);
     })
 });
