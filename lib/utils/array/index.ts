@@ -1,15 +1,46 @@
+/**
+ * 平均数
+ * @param arr 
+ * @param valueSelector
+ * @returns 
+ * 
+ * @example
+ * average([1,2,3], x=>x) // 2
+ */
 export function average<T>(arr: Array<T>, valueSelector: (v: T) => number) {
     if (arr.length < 1) return 0;
 
     return sum(arr, valueSelector) / arr.length;
 }
 
+/**
+ * 数量(计数)
+ * @param arr 
+ * @param predicate
+ * @returns 
+ * 
+ * @example
+ * count([1,2,3], x=>x>1) // 2
+ * 
+ * 当predicate为空时统计数组长度
+ * count([1,2,3]) // 3
+ */
 export function count<T>(arr: Array<T>, predicate?: (v: T) => boolean) {
     return predicate ?
         arr.reduce((p, c) => predicate(c) ? ++p : p, 0) :
         arr.length
 }
 
+/**
+ * 求和(累加)
+ * @param arr 
+ * @param valueSelector 
+ * @returns 
+ * 
+ * @example
+ * sum([1,2,3],x=>x) // 6
+ * sum([{age:10},{age:20},{age:30}], x=>x.age) // 60
+ */
 export function sum<T>(arr: Array<T>, valueSelector: (v: T) => number) {
     return arr.reduce((p, c) => p + valueSelector(c), 0);
 }
@@ -60,7 +91,35 @@ export function skipWhile<T>(arr: Array<T>, predicate: (v: T) => boolean) {
     return result;
 }
 
+/**
+ * 分组
+ * @param arr 
+ * @param keySelector
+ * @example
+ * const datas = [{num:1,foo:"f"},{num:1,foo:"f"},{num:2,foo:"1"}];
+ * array.groupBy(datas, x=>num);
+ * 
+ * 结果类型 : Map<number,Array<{num:number,foo:string}>>
+ * 结果数据 : 
+ *           1 -> [{num:1,foo:"f"},{num:2,foo:"1"}]
+ *           2 -> [{num:1,foo:"f"}]
+ */
 export function groupBy<T, K>(arr: Array<T>, keySelector: (v: T) => K): Map<K, Array<T>>
+
+/**
+ * 分组
+ * @param arr 
+ * @param keySelector 
+ * @param valueSelector 
+ * @example
+ * const datas = [{num:1,foo:"f"},{num:1,foo:"f"},{num:2,foo:"1"}];
+ * array.groupBy(datas, x=>num, x=>x.foo);
+ * 
+ * 结果类型 : Map<number,Array<string>>
+ * 结果数据 : 
+ *           1 -> ['f','1']
+ *           2 -> ['f']
+ */
 export function groupBy<T, K, V>(arr: Array<T>, keySelector: (v: T) => K, valueSelector: (v: T) => V): Map<K, Array<V>>
 export function groupBy<T, K, V>(arr: Array<T>, keySelector: (v: T) => K, valueSelector?: (v: T) => V) {
 
@@ -78,13 +137,39 @@ export function groupBy<T, K, V>(arr: Array<T>, keySelector: (v: T) => K, valueS
     return result;
 }
 
+/**
+ * 聚合
+ * @param lArr 聚合数组
+ * @param rArr 被聚合数组
+ * @param lKeySelector 
+ * @param rKeySelector 
+ * @param resultSelector 
+ * @param compare 比较器
+ * @returns 
+ * @example
+ * const lArr = [1,2,3,4,5];
+ * const rArr = [{id:1,foo:'f'},{id:1,foo:'ff'},{id:3,foo:'fff'}];
+ * 
+ * array.join(lArr, rArr, x=>x, x=>x.id,
+ *      (v1,v2s)=>{ return {id:v1, foos:v2s.map(v=>v.foo)}},
+ *      (k1,k2) => k1===k2);
+ * 结果：
+ *      [
+ *        { id:1, foos: ['f','ff']},
+ *        { id:2, foos: []},
+ *        { id:3, foos: ['fff']},
+ *        { id:4, foos: []},
+ *        { id:5, foos: []},
+ *      ]
+ * 
+ */
 export function join<TLeft, TRight, TKey, TResult>(
     lArr: Array<TLeft>,
     rArr: Array<TRight>,
     lKeySelector: (v: TLeft) => TKey,
     rKeySelector: (v: TRight) => TKey,
     resultSelector: (vL: TLeft, vRArray: Array<TRight>) => TResult,
-    compare: (v1: TKey, v2: TKey) => boolean = (v1, v2) => v1 === v2) {
+    compare: (k1: TKey, k2: TKey) => boolean = (k1, k2) => k1 === k2) {
 
     const result = new Array<TResult>();
 

@@ -1,6 +1,5 @@
 /**
- * convert Date to DateOnly
- *
+ * Date类型转换为年月日number类型
  * @param date 
  * @returns 
  * @example 
@@ -12,7 +11,7 @@ export function toDateOnly(date: Date) {
 }
 
 /**
- * copy and add days
+ * 增加一天
  * @param date 
  * @param days 
  * @returns 
@@ -25,7 +24,7 @@ export function addDays(date: Date, days: number) {
 }
 
 /**
- * copy and add months
+ * 增加一个月
  * @param date 
  * @param months 
  * @returns 
@@ -37,7 +36,7 @@ export function addMonths(date: Date, months: number) {
 }
 
 /**
- * copy and add years
+ * 增加一年
  * @param date 
  * @param years 
  * @returns 
@@ -51,7 +50,7 @@ export function addYears(date: Date, years: number) {
 type DateFormat = "yyyy-MM-dd" | "HH:mm:ss" | "yyyy-MM-dd HH:mm:ss" | "yyyy年MM月dd日" | "yyyy年MM月dd日 HH:mm:ss";
 
 /**
- * format date
+ * Date格式化
  * @param date 
  * @param format 
  * @example
@@ -93,11 +92,29 @@ export function formatDate(date: string | Date, format: DateFormat) {
 }
 
 /**
- * get near days exclude originDate
- * @param originDate 
- * @param days 
+ * 获取附近天数
+ * @param originDate 基点日期
+ * @param days 天数
+ * @example
+ * date.getNearDays(new Date('2022-02-02'), 2);   
+ * 结果 : [Date:2022-02-03 , Date:2022-02-04]
+ * 
+ * date.getNearDays(new Date('2022-02-02'), -2);  
+ * 结果 : [Date:2022-02-01 , Date:2022-01-31]
  */
 export function getNearDays(originDate: Date, days: number): Array<Date>;
+/**
+ * 获取附近天数并格式化
+ * @param originDate 
+ * @param days 
+ * @param format 
+ * @example
+ * date.getNearDays(new Date('2022-02-02'), 2, "yyyy-MM-dd");   
+ * 结果 : ['2022-02-03' , '2022-02-04']
+ * 
+ * date.getNearDays(new Date('2022-02-02'), -2,"yyyy-MM-dd");  
+ * 结果 : ['2022-02-01' , '2022-01-31']
+ */
 export function getNearDays(originDate: Date, days: number, format: DateFormat): Array<string>
 export function getNearDays(originDate: Date, days: number, format?: DateFormat) {
     if (!Number.isInteger(days))
@@ -117,11 +134,28 @@ export function getNearDays(originDate: Date, days: number, format?: DateFormat)
 }
 
 /**
- * get near days include originDate
+ * 获取附近天数，包括基点日期
  * @param originDate 
  * @param days 
+ * @example
+ * date.getNearinDays(new Date('2022-02-02'), 2); 
+ * 结果 : [Date:2022-02-02 , Date:2022-02-03 , Date:2022-02-04]
+ * 
+ * date.getNearinDays(new Date('2022-02-02'), -2);
+ * 结果 : [Date:2022-01-31 , Date:2022-02-01 , Date:2022-02-02]
  */
 export function getNearinDays(originDate: Date, days: number): Array<Date>;
+/**
+ * 获取附近天数，包括基点日期并格式化
+ * @param originDate 
+ * @param days 
+ * @example
+ * date.getNearinDays(new Date('2022-02-02'), 2, "yyyy-MM-dd"); 
+ * 结果 : ['2022-02-02', '2022-02-03', '2022-02-04']
+ * 
+ * date.getNearinDays(new Date('2022-02-02'), -2, "yyyy-MM-dd");
+ * 结果 : ['2022-01-31', '2022-02-01', '2022-02-02']
+ */
 export function getNearinDays(originDate: Date, days: number, format: DateFormat): Array<string>
 export function getNearinDays(originDate: Date, days: number, format?: DateFormat) {
     if (!Number.isInteger(days))

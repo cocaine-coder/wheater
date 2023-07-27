@@ -14,7 +14,7 @@ export namespace os {
 
 /**
  * 邮箱检验
- * @param value 邮箱
+ * @param value
  * @returns 
  */
 export function email(value: string) {
@@ -23,7 +23,7 @@ export function email(value: string) {
 
 /**
  * 手机号检验
- * @param value 手机号 
+ * @param value 
  * @returns 
  */
 export function phone(value: string) {
@@ -32,8 +32,8 @@ export function phone(value: string) {
 
 /**
  * 身份证检验
- * @param value 身份证号
- * @param options 检验选项
+ * @param value
+ * @param options
  * @returns 
  */
 export function card(value: string, options: CardOptions = {}) {
@@ -74,8 +74,8 @@ export function card(value: string, options: CardOptions = {}) {
 
 /**
  * 密码验证
- * @param value 密码
- * @param options 验证选项
+ * @param value
+ * @param options
  * @returns 
  */
 export function password(value: string, options: PasswordOptions = {}) {
