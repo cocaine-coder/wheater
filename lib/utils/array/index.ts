@@ -1,16 +1,44 @@
 /**
- * 平均数
+ * number数组求和
+ * @param arr 
+ * @example
+ * sum([1, 2, 3]) // 6
+ */
+export function sum(arr: Array<number>): number
+/**
+ * 求和(累加)
+ * @param arr 
+ * @param valueSelector 
+ * @returns 
+ * @example
+ * sum([{age:10},{age:20},{age:30}], x=>x.age) // 60
+ */
+export function sum<T>(arr: Array<T>, valueSelector: (v: T) => number): number
+export function sum<T>(arr: Array<T>, valueSelector?: (v: T) => number): number {
+    return arr.reduce((p, c) => p + (valueSelector ? valueSelector(c) : <number>c), 0);
+}
+
+/**
+ * number数组平均数
+ * @param arr
+ * @example
+ * average([1,2,3])  // 4
+ */
+export function average(arr: Array<number>): number
+/**
+ * 自定义数据求平均数
  * @param arr 
  * @param valueSelector
  * @returns 
  * 
  * @example
- * average([1,2,3], x=>x) // 2
+ * average(["1","2","3"], x =>  Number.parseInt(x)) // 4
  */
-export function average<T>(arr: Array<T>, valueSelector: (v: T) => number) {
+export function average<T>(arr: Array<T>, valueSelector: (v: T) => number): number
+export function average<T>(arr: Array<T>, valueSelector?: (v: T) => number): number {
     if (arr.length < 1) return 0;
 
-    return sum(arr, valueSelector) / arr.length;
+    return arr.reduce((p, c) => p + (valueSelector ? valueSelector(c) : <number>c) / arr.length, 0);
 }
 
 /**
@@ -29,20 +57,6 @@ export function count<T>(arr: Array<T>, predicate?: (v: T) => boolean) {
     return predicate ?
         arr.reduce((p, c) => predicate(c) ? ++p : p, 0) :
         arr.length
-}
-
-/**
- * 求和(累加)
- * @param arr 
- * @param valueSelector 
- * @returns 
- * 
- * @example
- * sum([1,2,3],x=>x) // 6
- * sum([{age:10},{age:20},{age:30}], x=>x.age) // 60
- */
-export function sum<T>(arr: Array<T>, valueSelector: (v: T) => number) {
-    return arr.reduce((p, c) => p + valueSelector(c), 0);
 }
 
 export function take<T>(arr: Array<T>, amount: number) {

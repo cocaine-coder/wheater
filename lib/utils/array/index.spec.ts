@@ -4,7 +4,8 @@ import { describe, expect, test } from "vitest";
 describe("array extensions", () => {
 
     test("average", () => {
-        expect(average([1, 2, 3], x => x)).toBe(2);
+        expect(average([1, 2, 3])).toBe(2);
+        expect(average([{ age: 12 }, { age: 13 }, { age: 14 }], x => x.age)).toBe(13);
         expect(average([], x => 1)).toBe(0);
     });
 
@@ -14,7 +15,8 @@ describe("array extensions", () => {
     });
 
     test("sum", () => {
-        expect(sum([1, 2, 3], x => x)).toBe(6);
+        expect(sum([1, 2, 3])).toBe(6);
+        expect(sum([{ age: 12 }, { age: 13 }, { age: 14 }], x => x.age)).toBe(39);
     });
 
     test("take", () => {
