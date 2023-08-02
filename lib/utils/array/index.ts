@@ -59,6 +59,27 @@ export function count<T>(arr: Array<T>, predicate?: (v: T) => boolean) {
         arr.length
 }
 
+/**
+ * 返回第一个匹配到的元素，如果predicate为空则返回数组的0下标元素。若全不匹配则返回undefined
+ * @param arr 
+ * @param predicate 
+ * @returns 
+ * 
+ * @example
+ * first([1,2,3]) // 1
+ * first([1, 2, 3], x => x>1) // 2
+ */
+export function first<T>(arr: Array<T>, predicate?: (v: T) => boolean) {
+    if(!predicate)
+        return arr[0];
+
+    for (let i = 0; i < arr.length; i++) {
+        const element = arr[i];
+        if(predicate(element))
+            return element;
+    }
+}
+
 export function take<T>(arr: Array<T>, amount: number) {
     if (amount < 1) return [];
     return arr.slice(0, amount);

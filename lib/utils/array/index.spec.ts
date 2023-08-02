@@ -1,4 +1,4 @@
-import { average, count, sum, take, takeLast, takeWhile, skip, skipLast, skipWhile, groupBy, join } from '.'
+import { average, count, sum, take, takeLast, takeWhile, skip, skipLast, skipWhile, groupBy, join, first } from '.'
 import { describe, expect, test } from "vitest";
 
 describe("array extensions", () => {
@@ -18,6 +18,12 @@ describe("array extensions", () => {
         expect(sum([1, 2, 3])).toBe(6);
         expect(sum([{ age: 12 }, { age: 13 }, { age: 14 }], x => x.age)).toBe(39);
     });
+
+    test("first", () => {
+        expect(first([1, 2, 3])).toBe(1);
+        expect(first([1, 2, 3], x => x > 1)).toBe(2);
+        expect(first([1, 2, 3], x => x < 0)).toBeUndefined();
+    })
 
     test("take", () => {
         const arr = [1, 2, 3];
