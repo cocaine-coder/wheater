@@ -11,6 +11,7 @@ describe("time", () => {
         expect(formatDate(date, 'yyyy-MM-dd HH:mm:ss')).toBe("1997-04-14 12:00:06");
         expect(formatDate(date, 'yyyy年MM月dd日')).toBe("1997年04月14日");
         expect(formatDate(date, 'yyyy年MM月dd日 HH:mm:ss')).toBe("1997年04月14日 12:00:06");
+        expect(formatDate(date, 'yyyy年MM月dd日 HH时mm分ss秒')).toBe("1997年04月14日 12时00分06秒");
 
         expect(formatDate(dateString, 'yyyy-MM-dd')).toBe("1997-04-14");
         expect(() => formatDate("2022-14-02", 'yyyy-MM-dd')).toThrowError("Date Invalid");

@@ -1,10 +1,12 @@
 import { TTreeNode } from "../../types";
 
-export interface ITreeNodeProps<TNodeId> {
+type TNodeId = string | number
+
+export interface ITreeNodeProps {
     id: TNodeId
 }
 
-export default class Tree<TNodeId extends string | number, T extends ITreeNodeProps<TNodeId>>{
+export default class Tree<T extends ITreeNodeProps>{
     private _node: TTreeNode<T>;
 
     get root() {
