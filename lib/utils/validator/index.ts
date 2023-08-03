@@ -13,6 +13,15 @@ export namespace os {
 }
 
 /**
+ * url检验
+ * @param value 
+ * @returns 
+ */
+export function url(value:string){
+    return /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\*\+,;=.]+$/.test(value);
+}
+
+/**
  * 邮箱检验
  * @param value
  * @returns 
@@ -97,4 +106,13 @@ export function password(value: string, options: PasswordOptions = {}) {
 
     const reg = new RegExp(regStr + `.{${options.minLength},${options.maxLength}}$`);
     return reg.test(value);
+}
+
+/**
+ * 判断value是否为数字
+ * @param value 
+ * @returns 
+ */
+export function numberic(value:any) : boolean{
+    return !(value instanceof Array) && (value - parseFloat(value) + 1) >= 0;
 }

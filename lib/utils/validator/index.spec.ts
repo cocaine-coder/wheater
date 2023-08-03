@@ -8,9 +8,30 @@ describe("validator", () => {
         expect(validator.os.isMobile()).toBeFalsy();
     });
 
+    test("url", () => {
+        const urls = [
+            'https://www.example.com',
+            'http://www.example.com',
+            'www.example.com',
+            'example.com',
+            'http://blog.example.com',
+            'http://www.example.com/product',
+            'http://www.example.com/products?id=1&page=2',
+            'http://www.example.com#up',
+            'http://255.255.255.255',
+            '255.255.255.255',
+            'http://invalid.com/perl.cgi?key=',
+            'http://web-site.com/cgi-bin/perl.cgi?key1=value1&key2',
+            'http://www.site.com:8008',
+        ].map(url=>validator.url(url));
+
+        expect(urls.every(x=>x)).toBeTruthy();
+    });
+
     test("email", () => {
         expect(validator.email("21345678@qq.com")).toBeTruthy();
         expect(validator.email("Qwer1234@qq.com")).toBeTruthy();
+
         expect(validator.email("123123123qq.com")).toBeFalsy();
         expect(validator.email("123.1231@qq.com")).toBeFalsy();
         expect(validator.email("123@123q@qq.com")).toBeFalsy();
@@ -34,16 +55,12 @@ describe("validator", () => {
 
         // 长度问题
         expect(validator.card("440923197")).toBeFalsy();
-
         // 省份错误
         expect(validator.card("490923197209250033")).toBeFalsy();
-
         // 字母问题
         expect(validator.card("44a923197209250033")).toBeFalsy();
-
         // 日期问题
         expect(validator.card("440923197202330033")).toBeFalsy();
-
         // 校验码问题
         expect(validator.card("440923197209250031")).toBeFalsy();
     });
@@ -53,6 +70,7 @@ describe("validator", () => {
         expect(validator.password("1234qwer")).toBeTruthy();
         expect(validator.password("1234Qwer")).toBeTruthy();
         expect(validator.password("测试123qwer")).toBeTruthy();
+        
         expect(validator.password("123123123")).toBeFalsy();
         expect(validator.password("qwerasdf")).toBeFalsy();
         expect(validator.password("1q")).toBeFalsy();
@@ -78,4 +96,24 @@ describe("validator", () => {
         // 最小长度大于最大长度 throw异常
         expect(() => validator.password("123qwer", { minLength: 60 })).toThrow();
     });
+
+    test("numberic", () => {
+        expect(validator.numberic(1)).toBeTruthy();
+        expect(validator.numberic("123")).toBeTruthy();
+        expect(validator.numberic("+10")).toBeTruthy();
+        expect(validator.numberic("-10")).toBeTruthy();
+        expect(validator.numberic("0xff")).toBeTruthy();
+        expect(validator.numberic("0xFF")).toBeTruthy();
+        expect(validator.numberic("8e5")).toBeTruthy();
+
+        expect(validator.numberic("")).toBeFalsy;
+        expect(validator.numberic(" ")).toBeFalsy;
+        expect(validator.numberic("123q")).toBeFalsy();
+        expect(validator.numberic(null)).toBeFalsy();
+        expect(validator.numberic(undefined)).toBeFalsy();
+        expect(validator.numberic({})).toBeFalsy();
+        expect(validator.numberic([1, 2, 3])).toBeFalsy();
+        expect(validator.numberic(-Infinity)).toBeFalsy();
+        expect(validator.numberic(Infinity)).toBeFalsy();
+    })
 });
