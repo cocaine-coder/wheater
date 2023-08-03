@@ -1,0 +1,1 @@
+import{_ as e,v as t,b as s}from"./chunks/framework.caa0fbaf.js";const u=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"guide/utils/deep.md","filePath":"guide/utils/deep.md"}'),a={name:"guide/utils/deep.md"};function d(r,i,p,n,o,c){return t(),s("div")}const f=e(a,[["render",d]]);export{u as __pageData,f as default};
