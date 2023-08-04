@@ -29,24 +29,35 @@ export function sum<T>(arr: Array<T>, valueSelector?: (v: T) => number, predicat
 /**
  * number数组平均数
  * @param arr
+ * @param valueSelector 
+ * @param predicate 
  * @example
  * average([1,2,3])  // 4
  */
-export function average(arr: Array<number>): number
+export function average(arr: Array<number>, valueSelector?: (v: number) => number, predicate?: (v: number) => boolean): number
 /**
  * 自定义数据求平均数
  * @param arr 
  * @param valueSelector
+ * @param predicate 
  * @returns 
  * 
  * @example
  * average(["1","2","3"], x =>  Number.parseInt(x)) // 4
  */
-export function average<T>(arr: Array<T>, valueSelector: (v: T) => number): number
-export function average<T>(arr: Array<T>, valueSelector?: (v: T) => number): number {
+export function average<T>(arr: Array<T>, valueSelector: (v: T) => number, predicate?: (v: T) => boolean): number
+export function average<T>(arr: Array<T>, valueSelector?: (v: T) => number, predicate?: (v: T) => boolean): number {
     if (arr.length < 1) return 0;
 
-    return arr.reduce((p, c) => p + (valueSelector ? valueSelector(c) : <number>c) / arr.length, 0);
+    let count = 0;
+
+    return arr.reduce((p, c) => {
+        if (predicate && !predicate(c))
+            return p;
+
+        count++;
+        return p + (valueSelector ? valueSelector(c) : <number>c)
+    }, 0) / count;
 }
 
 /**
@@ -61,14 +72,14 @@ export function average<T>(arr: Array<T>, valueSelector?: (v: T) => number): num
  * 当predicate为空时统计数组长度
  * count([1,2,3]) // 3
  */
-export function count<T>(arr: Array<T>, predicate?: (v: T) => boolean) {
+export function count<T>(arr: Array<T>, predicate?: (v: T) => boolean): number {
     return predicate ?
         arr.reduce((p, c) => predicate(c) ? ++p : p, 0) :
         arr.length
 }
 
 /**
- * 返回第一个匹配到的元素，如果predicate为空则返回数组的0下标元素。若全不匹配则返回undefined
+ * 返回第一个匹配到的元素，如果predicate为空则返回数组第一个元素。若全不匹配则返回undefined
  * @param arr 
  * @param predicate 
  * @returns 
@@ -77,7 +88,7 @@ export function count<T>(arr: Array<T>, predicate?: (v: T) => boolean) {
  * first([1,2,3]) // 1
  * first([1, 2, 3], x => x>1) // 2
  */
-export function first<T>(arr: Array<T>, predicate?: (v: T) => boolean) {
+export function first<T>(arr: Array<T>, predicate?: (v: T) => boolean): T | undefined {
     if (!predicate)
         return arr[0];
 
@@ -88,17 +99,17 @@ export function first<T>(arr: Array<T>, predicate?: (v: T) => boolean) {
     }
 }
 
-export function take<T>(arr: Array<T>, amount: number) {
+export function take<T>(arr: Array<T>, amount: number): Array<T> {
     if (amount < 1) return [];
     return arr.slice(0, amount);
 }
 
-export function takeLast<T>(arr: Array<T>, amount: number) {
+export function takeLast<T>(arr: Array<T>, amount: number): Array<T> {
     if (amount < 1) return [];
     return arr.slice(-amount);
 }
 
-export function takeWhile<T>(arr: Array<T>, predicate: (v: T) => boolean) {
+export function takeWhile<T>(arr: Array<T>, predicate: (v: T) => boolean): Array<T> {
     const result = new Array<T>();
     let flag = false;
 
@@ -111,17 +122,17 @@ export function takeWhile<T>(arr: Array<T>, predicate: (v: T) => boolean) {
     return result;
 }
 
-export function skip<T>(arr: Array<T>, amount: number) {
+export function skip<T>(arr: Array<T>, amount: number): Array<T> {
     if (amount < 1) return [];
     return arr.slice(amount);
 }
 
-export function skipLast<T>(arr: Array<T>, amount: number) {
+export function skipLast<T>(arr: Array<T>, amount: number): Array<T> {
     if (amount < 1) return [];
     return arr.slice(0, -amount)
 }
 
-export function skipWhile<T>(arr: Array<T>, predicate: (v: T) => boolean) {
+export function skipWhile<T>(arr: Array<T>, predicate: (v: T) => boolean): Array<T> {
     const result = new Array<T>();
 
     for (let i = 0; i < arr.length; i++) {
@@ -211,8 +222,8 @@ export function join<TLeft, TRight, TKey, TResult>(
     rArr: Array<TRight>,
     lKeySelector: (v: TLeft) => TKey,
     rKeySelector: (v: TRight) => TKey,
-    resultSelector: (vL: TLeft, vRArray: Array<TRight>) => TResult,
-    compare: (k1: TKey, k2: TKey) => boolean = (k1, k2) => k1 === k2) {
+    resultSelector: (vL: TLeft, vRs: Array<TRight>) => TResult,
+    compare: (k1: TKey, k2: TKey) => boolean = (k1, k2) => k1 === k2): Array<TResult> {
 
     const result = new Array<TResult>();
 
