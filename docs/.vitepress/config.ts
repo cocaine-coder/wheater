@@ -2,8 +2,9 @@ import { UserConfig, DefaultTheme } from 'vitepress'
 
 export default {
     title: 'wheater',
-    description: '解决js/ts一些微不足道的小事情',
+    description: '解决js/ts微不足道的小事情',
     appearance: 'dark',
+    base:'/wheat/',
     themeConfig: {
         logo: '/logo.svg',
         sidebar: [
