@@ -16,7 +16,12 @@ describe("array extensions", () => {
 
     test("sum", () => {
         expect(sum([1, 2, 3])).toBe(6);
+        expect(sum([1, 2, 3], undefined, x => x > 1)).toBe(5);
+        expect(sum([1, 2, 3], x => x * 2)).toBe(12);
+        expect(sum([1, 2, 3], x => x % 2)).toBe(2);
+
         expect(sum([{ age: 12 }, { age: 13 }, { age: 14 }], x => x.age)).toBe(39);
+        expect(sum([{ age: 12 }, { age: 17 }, { age: 18 }], x => x.age , x=> x.age>=18)).toBe(18);
     });
 
     test("first", () => {

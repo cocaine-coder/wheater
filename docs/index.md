@@ -13,8 +13,11 @@ hero:
       text: 快速开始
       link: /guide/introduction/index
     - theme: alt
-      text: 在 github 上查看
-      link: github.com/cocaine-coder/wheat
+      text: github
+      link: https://github.com/cocaine-coder/wheat
+    - theme: alt
+      text: npm
+      link: https://www.npmjs.com/package/wheater
 features:
   - icon: ⚡️
     title: 尽可能提供快速的方法

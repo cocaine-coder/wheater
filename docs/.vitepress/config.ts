@@ -4,7 +4,15 @@ export default {
     title: 'wheater',
     description: '解决js/ts微不足道的小事情',
     appearance: 'dark',
-    base:'/wheat/',
+    base: '/wheat/',
+    head: [
+        [
+            'link', { rel: 'icon', href: '/logo.svg' }
+        ]
+    ],
+    markdown: {
+        lineNumbers: true
+    },
     themeConfig: {
         logo: '/logo.svg',
         sidebar: [
@@ -17,10 +25,11 @@ export default {
                     { text: '反馈', link: '/guide/introduction/feedback' }
                 ]
             },
-            getRouters('guide','types',['page', 'tree']),
-            getRouters('guide','utils',['array', 'creator', 'date', 'deep', 'validator']),
-            getRouters('guide','models',['tree'])
+            getRouters('guide', 'types', ['page', 'tree']),
+            getRouters('guide', 'utils', ['array', 'creator', 'date', 'deep', 'validator']),
+            getRouters('guide', 'models', ['tree'])
         ],
+        socialLinks: [{ icon: 'github', link: "https://github.com/cocaine-coder/wheat" }]
     }
 } as UserConfig<DefaultTheme.Config>
 

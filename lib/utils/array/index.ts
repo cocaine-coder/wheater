@@ -1,21 +1,29 @@
 /**
  * number数组求和
  * @param arr 
+ * @param valueSelector 
+ * @param predicate 
  * @example
  * sum([1, 2, 3]) // 6
  */
-export function sum(arr: Array<number>): number
+export function sum(arr: Array<number>, valueSelector?: (v: number) => number, predicate?: (v: number) => boolean): number
 /**
  * 求和(累加)
  * @param arr 
  * @param valueSelector 
+ * @param predicate 
  * @returns 
  * @example
  * sum([{age:10},{age:20},{age:30}], x=>x.age) // 60
  */
-export function sum<T>(arr: Array<T>, valueSelector: (v: T) => number): number
-export function sum<T>(arr: Array<T>, valueSelector?: (v: T) => number): number {
-    return arr.reduce((p, c) => p + (valueSelector ? valueSelector(c) : <number>c), 0);
+export function sum<T>(arr: Array<T>, valueSelector: (v: T) => number, predicate?: (v: T) => boolean): number
+export function sum<T>(arr: Array<T>, valueSelector?: (v: T) => number, predicate?: (v: T) => boolean): number {
+    return arr.reduce((p, c) => {
+        if (predicate && !predicate(c))
+            return p;
+
+        return p + (valueSelector ? valueSelector(c) : <number>c)
+    }, 0);
 }
 
 /**
@@ -70,12 +78,12 @@ export function count<T>(arr: Array<T>, predicate?: (v: T) => boolean) {
  * first([1, 2, 3], x => x>1) // 2
  */
 export function first<T>(arr: Array<T>, predicate?: (v: T) => boolean) {
-    if(!predicate)
+    if (!predicate)
         return arr[0];
 
     for (let i = 0; i < arr.length; i++) {
         const element = arr[i];
-        if(predicate(element))
+        if (predicate(element))
             return element;
     }
 }

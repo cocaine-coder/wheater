@@ -6,7 +6,7 @@ export default defineConfig({
             entry: "./lib/index.ts",
             name: "Wheat",
             formats: ['umd'],
-            fileName: (format) => `wheat.${format}.js`
+            fileName: (format) => `index.${format}.js`
         }
     }
 })
