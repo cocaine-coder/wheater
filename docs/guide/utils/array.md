@@ -1,4 +1,8 @@
-# Array 
+# array 
+
+```ts
+import { array } from 'wheater';
+```
 
 ## sum
 
@@ -14,8 +18,6 @@ function sum(
 
 *示例*
 ```ts
-import { array } from 'wheater';
-
 const nums = [1, 2, 3];
 array.sum(nums);                        // 6
 array.sum(nums, x => x % 2);            // 2
@@ -34,8 +36,6 @@ function sum<T>(
 
 *示例*
 ```ts
-import { array } from 'wheater';
-
 const persons = [
     {name : "1", age : 10},
     {name : "2", age : 20},
@@ -62,8 +62,6 @@ function count<T>(
 
 *示例*
 ```ts
-import { array } from 'wheater';
-
 const persons = [
     {name : "1", age : 10},
     {name : "2", age : 20},
@@ -86,8 +84,6 @@ function first<T>(
 
 *示例*
 ```ts
-import { array } from 'wheater';
-
 const persons = [
     {name : "1", age : 10},
     {name : "2", age : 20},
@@ -109,8 +105,6 @@ function take<T>(
 
 *示例*
 ```ts
-import { array } from 'wheater';
-
 const nums = [1, 2, 3, 4];
 
 array.take(nums, 3); // [1, 2, 3]
@@ -128,8 +122,6 @@ function takeLast<T>(
 
 *示例*
 ```ts
-import { array } from 'wheater';
-
 const nums = [1, 2, 3, 4];
 
 array.takeLast(nums, 3); // [2, 3, 4]
@@ -147,8 +139,6 @@ function takeWhile<T>(
 
 *示例*
 ```ts
-import { array } from 'wheater';
-
 const nums = [1, 2, 3, 1];
 
 array.takeWhile(nums, x => x > 2); // [3, 1]
@@ -177,8 +167,6 @@ function groupBy<T, K>(
 
 *示例*
 ```ts
-import { array } from 'wheater'
-
 const persons = [
     {name : "1", age : 10},
     {name : "2", age : 20},
@@ -206,8 +194,6 @@ function groupBy<T, K, V>(
 
 *示例*
 ```ts
-import { array } from 'wheater'
-
 const persons = [
     {name : "1", age : 10},
     {name : "2", age : 20},
@@ -240,8 +226,6 @@ function join<TLeft, TRight, TKey, TResult>(
 
 *示例*
 ```ts
-import { array } from 'wheater'
-
 const lArr = [1,2,3,4,5];
 const rArr = [{id:1,foo:'f'},{id:1,foo:'ff'},{id:3,foo:'fff'}];
 
