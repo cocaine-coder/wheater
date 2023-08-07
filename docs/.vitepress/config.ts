@@ -4,7 +4,7 @@ export default {
     title: 'wheater',
     description: '解决js/ts微不足道的小事情',
     appearance: 'dark',
-    base: '/wheat/',
+    base: '/wheater/',
     head: [
         [
             'link', { rel: 'icon', href: '/logo.svg' }
@@ -29,7 +29,7 @@ export default {
             getRouters('guide', 'utils', ['array', 'creator', 'date', 'deep', 'validator']),
             getRouters('guide', 'models', ['tree'])
         ],
-        socialLinks: [{ icon: 'github', link: "https://github.com/cocaine-coder/wheat" }]
+        socialLinks: [{ icon: 'github', link: "https://github.com/cocaine-coder/wheater" }]
     }
 } as UserConfig<DefaultTheme.Config>
 

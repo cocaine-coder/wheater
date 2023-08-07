@@ -4,7 +4,7 @@ export default defineConfig({
     build: {
         lib: {
             entry: "./lib/index.ts",
-            name: "Wheat",
+            name: "Wheater",
             formats: ['umd'],
             fileName: (format) => `index.${format}.js`
         }

@@ -14,7 +14,7 @@ hero:
       link: /guide/introduction/index
     - theme: alt
       text: github
-      link: https://github.com/cocaine-coder/wheat
+      link: https://github.com/cocaine-coder/wheater
     - theme: alt
       text: npm
       link: https://www.npmjs.com/package/wheater

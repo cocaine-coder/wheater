@@ -24,4 +24,4 @@ import { array, creator, date, deep, validator } form 'wheater';
 
 ### 文档 
 
-[documents](https://cocaine-coder.github.io/wheat/)
+[documents](https://cocaine-coder.github.io/wheater/)

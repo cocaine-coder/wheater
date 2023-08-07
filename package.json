@@ -2,7 +2,7 @@
   "name": "wheater",
   "version": "1.0.7",
   "main": "./dist/index.js",
-  "repository": "https://github.com/cocaine-coder/wheat.git",
+  "repository": "https://github.com/cocaine-coder/wheater.git",
   "author": "cocaine_coder <tracywang1997@outlook.com>",
   "license": "MIT",
   "scripts": {
