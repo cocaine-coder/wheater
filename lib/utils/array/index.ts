@@ -246,3 +246,30 @@ export function join<TLeft, TRight, TKey, TResult>(
 
     return result;
 }
+
+/**
+ * 将数组长度适配到length长度，若length大于数组长度则使用defaultValue填充，若小于则删除多余元素
+ * @param arr 
+ * @param length 
+ * @param defaultValue 
+ * @returns 
+ */
+export function fitLength<T>(arr: Array<T>, length: number, defaultValue: T) {
+    if (length <= 0) { 
+        arr.length = 0; 
+        return; 
+    }
+
+    if (arr.length === length) return;
+
+    const maxLength = Math.max(arr.length, length);
+
+    for (let i = 0; i < maxLength; i++) {
+        if (i >= arr.length) {
+            arr.push(defaultValue);
+        }
+        else if (i >= length) {
+            arr.pop();
+        }
+    }
+}
