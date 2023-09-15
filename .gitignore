@@ -2,5 +2,3 @@ dist
 node_modules
 coverage
 docs/.vitepress/cache
-
-!docs/.vitepress/dist

@@ -16,3 +16,5 @@ export type TTreeNode<T> = {
 } & {
     children?: Array<TTreeNode<T>>
 }
+
+export type TUrlQuery = Record<string,string | number | boolean | undefined>;

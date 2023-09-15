@@ -26,7 +26,7 @@ export default {
                 ]
             },
             getRouters('guide', 'types', ['page', 'tree']),
-            getRouters('guide', 'utils', ['array', 'creator', 'date', 'deep', 'validator']),
+            getRouters('guide', 'utils', ['array', 'creator', 'date', 'deep', 'validator','common']),
             getRouters('guide', 'models', ['tree'])
         ],
         socialLinks: [{ icon: 'github', link: "https://github.com/cocaine-coder/wheater" }]

@@ -1,1 +1,0 @@
-import{_ as t,v as a,b as e}from"./chunks/framework.caa0fbaf.js";const p=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"guide/utils/validator.md","filePath":"guide/utils/validator.md"}'),r={name:"guide/utils/validator.md"};function s(i,d,o,n,c,l){return a(),e("div")}const u=t(r,[["render",s]]);export{p as __pageData,u as default};

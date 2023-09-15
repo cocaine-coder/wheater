@@ -1,3 +1,5 @@
+import { TUrlQuery } from "../types";
+
 export const cities = {
     11: "北京", 12: "天津", 13: "河北", 14: "山西", 15: "内蒙古",
     21: "辽宁", 22: "吉林", 23: "黑龙江",
@@ -49,4 +51,22 @@ export function getCities(options: GetCitiesOptions = {}) {
     }
 
     return results;
+}
+
+export function composeUrlQuery(query?: TUrlQuery) {
+    let ret = "";
+
+    if (query) {
+        for (const key in query) {
+            const value = query[key];
+
+            if(value !== undefined)
+                ret += `${key}=${value}&`;
+        }
+
+        if (ret)
+            ret = ret.slice(0, ret.length - 1);
+    }
+
+    return ret;
 }
