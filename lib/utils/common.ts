@@ -65,7 +65,7 @@ export function composeUrlQuery(query?: TUrlQuery) {
         for (const key in query) {
             const value = query[key];
 
-            if(value !== undefined)
+            if (value !== undefined)
                 ret += `${key}=${value}&`;
         }
 
@@ -74,4 +74,10 @@ export function composeUrlQuery(query?: TUrlQuery) {
     }
 
     return ret;
+}
+
+export namespace chars {
+    export const num = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+    export const letterLower = 'abcdefghijklmnopqrstuvwxyz'.split('');
+    export const letterUpper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 }
