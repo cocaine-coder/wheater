@@ -53,6 +53,11 @@ export function getCities(options: GetCitiesOptions = {}) {
     return results;
 }
 
+/**
+ * 拼凑url query参数，如果query为空或者query每一项都为空返回 ''
+ * @param query 参数
+ * @returns 
+ */
 export function composeUrlQuery(query?: TUrlQuery) {
     let ret = "";
 
