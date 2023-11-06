@@ -1,6 +1,6 @@
 {
   "name": "wheater",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "main": "./dist/index.js",
   "repository": "https://github.com/cocaine-coder/wheater.git",
   "author": "cocaine_coder <tracywang1997@outlook.com>",

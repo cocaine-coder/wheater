@@ -6,6 +6,7 @@ import * as creator from './utils/creator';
 import * as date from './utils/date';
 import * as deep from './utils/deep';
 import * as validator from './utils/validator';
+import * as dom from './utils/dom';
 
 export {
     types,
@@ -17,4 +18,5 @@ export {
     deep,
     date,
     validator,
+    dom
 }
