@@ -18,3 +18,5 @@ export type TTreeNode<T> = {
 }
 
 export type TUrlQuery = Record<string,string | number | boolean | undefined>;
+
+export type DeepPartial<T> = { [P in keyof T]?: DeepPartial<T[P]> };

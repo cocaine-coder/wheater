@@ -1,3 +1,6 @@
+import { DeepPartial } from "../../types";
+import { setProps } from "../deep";
+
 /**
  * 创建dom
  * @param target 
@@ -8,6 +11,7 @@
  */
 export function createHtmlElement<K extends keyof HTMLElementTagNameMap>(target: K, classNames?: string[], children?: (Node | string)[], options?: {
     onClick?: (e: MouseEvent, element: HTMLElementTagNameMap[K]) => void,
+    values?: DeepPartial<HTMLElementTagNameMap[K]>
 }) {
     const element = document.createElement(target);
     if (children)
@@ -16,9 +20,13 @@ export function createHtmlElement<K extends keyof HTMLElementTagNameMap>(target:
         element.classList.add(...classNames);
 
     if (options) {
-        const { onClick } = options;
+        const { onClick, values } = options;
         if (onClick) {
             element.onclick = event => onClick(event, element);
+        }
+
+        if (values) {
+            setProps(values, element, { skipEmpty: true });
         }
     }
 

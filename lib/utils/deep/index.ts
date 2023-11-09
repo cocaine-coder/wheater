@@ -40,9 +40,9 @@ export function equal<T>(a: T, b: T) {
             const keys = a.keys();
             let k = keys.next();
 
-            while(!k.done){
-                if(!b.has(k.value)) return false;
-                if(!equal(a.get(k.value),b.get(k.value))) return false;
+            while (!k.done) {
+                if (!b.has(k.value)) return false;
+                if (!equal(a.get(k.value), b.get(k.value))) return false;
                 k = keys.next();
             }
 
@@ -65,7 +65,9 @@ export function equal<T>(a: T, b: T) {
     return a !== a && b !== b;
 }
 
-export function setProps<T extends object>(src: T, dest: T) {
+export function setProps<T extends object>(src: T, dest: T, options?: {
+    skipEmpty?: boolean
+}) {
     for (const prop in src) {
         const value = src[prop];
 
@@ -76,7 +78,7 @@ export function setProps<T extends object>(src: T, dest: T) {
                 dest[prop] = new (value as any).constructor();
 
             setProps(value as any, dest[prop]);
-        } else {
+        } else if (!options?.skipEmpty || value) {
             dest[prop] = value;
         }
     }

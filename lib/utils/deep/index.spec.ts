@@ -136,4 +136,15 @@ describe("deep setProps", () => {
         expect(value1.c.e === value2.c.e).toBe(false);
         expect(value2).toStrictEqual(value1);
     });
+
+    test("skip empty", () => {
+        const srcValue = { a: 1, b: 2, c: undefined as { d: number } | undefined };
+        const destValue = { a: 2, b: 1, c: { d: 3 } };
+
+        setProps(srcValue, destValue, { skipEmpty: true });
+        expect(srcValue === destValue).toBe(false);
+        expect(destValue.a).toBe(1);
+        expect(destValue.b).toBe(2);
+        expect(destValue.c.d).toBe(3);
+    });
 });
