@@ -10,8 +10,10 @@ import { setProps } from "../deep";
  * @returns 
  */
 export function createHtmlElement<K extends keyof HTMLElementTagNameMap>(target: K, classNames?: string[], children?: (Node | string)[], options?: {
+    attributes?: Record<string, string>,
     onClick?: (e: MouseEvent, element: HTMLElementTagNameMap[K]) => void,
-    values?: DeepPartial<HTMLElementTagNameMap[K]>
+    onChange?: (e: Event, element: HTMLElementTagNameMap[K]) => void,
+    onInit?: (element: HTMLElementTagNameMap[K]) => void
 }) {
     const element = document.createElement(target);
     if (children)
@@ -20,14 +22,19 @@ export function createHtmlElement<K extends keyof HTMLElementTagNameMap>(target:
         element.classList.add(...classNames);
 
     if (options) {
-        const { onClick, values } = options;
-        if (onClick) {
-            element.onclick = event => onClick(event, element);
-        }
+        const { attributes, onClick, onChange, onInit } = options;
 
-        if (values) {
-            setProps(values, element, { skipEmpty: true });
-        }
+        if (attributes)
+            for (let key in attributes)
+                element.setAttribute(key, attributes[key]);
+
+        if (onClick)
+            element.onclick = e => onClick(e, element);
+
+        if (onChange)
+            element.onchange = e => onChange(e, element);
+
+        onInit?.(element);
     }
 
     return element;
