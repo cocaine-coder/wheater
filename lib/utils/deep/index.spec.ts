@@ -123,7 +123,23 @@ describe("deep equal", () => {
 
         expect(equal(value1, value2)).toBe(true);
         expect(equal(value1, value3)).toBe(false);
-    })
+    });
+
+    test("geojson", () => {
+        expect(equal({
+            "coordinates": [
+                120.84871754050255,
+                31.270265910875892
+            ],
+            "type": "Point"
+        }, {
+            "type": "Point",
+            "coordinates": [
+                120.84871754050255,
+                31.270265910875892
+            ]
+        })).toBe(true);
+    });
 });
 
 describe("deep setProps", () => {

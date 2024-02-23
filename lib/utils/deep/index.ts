@@ -52,7 +52,7 @@ export function equal<T>(a: T, b: T) {
         // other object
         const aKeys = Object.keys(a);
         const bKeys = Object.keys(b);
-        if (!equal(aKeys, bKeys)) return false;
+        // if (!equal(aKeys, bKeys)) return false;
 
         for (let i = 0; i < aKeys.length; i++) {
             const key = aKeys[i];
